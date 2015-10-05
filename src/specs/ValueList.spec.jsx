@@ -7,11 +7,16 @@ import { italicSection, sizeSection } from "./sections";
 describe("ValueList", function() {
   this.header(`## A list of Value's.`);
   before(() => {
-
     const items = [
       { label: "one", value: 1 },
-      { label: "two", value: { foo: "yo" } },
-
+      {
+        label: "two",
+        value: {
+          foo: ["foo", 2, new Date()],
+          bar: () => true
+        }
+      },
+      { label: "three", value: "toru" }
     ];
 
     this
