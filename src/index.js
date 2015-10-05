@@ -1,1 +1,7 @@
-console.log("\nStarted [react-object]\n\n");
+import Value from "./Value";
+import ValueList from "./ValueList";
+
+export default {
+  Value,
+  ValueList
+};
