@@ -1,6 +1,6 @@
 "use strict"
 import React from "react";
-import Primitive from "../src/Primitive";
+import Primitive from "../components/Primitive";
 import { inlineSection, italicSection, sizeSection } from "./sections";
 
 

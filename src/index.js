@@ -1,6 +1,9 @@
-import Value from "./Value";
-import ValueList from "./ValueList";
+import Value from "./components/Value";
+import ValueList from "./components/ValueList";
 
+/**
+ * Public API.
+ */
 export default {
   Value,
   ValueList

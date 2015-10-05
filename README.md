@@ -4,15 +4,6 @@
 Visual representation of javascript objects and values.
 
 
-
-## Run
+## Run in [UIHarness](http://uiharness.com/)
     npm install
     npm start
-
-
-## Test
-    # Run tests.
-    npm test
-
-    # Watch and re-run tests.
-    npm run tdd

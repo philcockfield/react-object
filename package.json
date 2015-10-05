@@ -4,7 +4,7 @@
   "description": "Visual representation of javascript objects and values.",
   "main": "./lib/index.js",
   "scripts": {
-    "start": "node ./specs.js",
+    "start": "node ./ui-harness",
     "test": "./node_modules/mocha/bin/mocha --recursive --compilers js:babel/register",
     "tdd": "./node_modules/mocha/bin/mocha --recursive --compilers js:babel/register --watch",
     "prepublish": "gulp build"

@@ -1,6 +1,6 @@
 "use strict"
 import React from "react";
-import Complex from "../src/Complex";
+import Complex from "../components/Complex";
 import { inlineSection, italicSection, sizeSection, objectValueSection, arrayValueSection } from "./sections";
 
 
@@ -14,8 +14,6 @@ describe("Complex", function() {
             value={{ foo: 123, bar: "hello", baz: { number: -1 }}}
             isExpanded={true} />
     );
-
-    console.log("this", this);
   });
 
   section("label", () => {

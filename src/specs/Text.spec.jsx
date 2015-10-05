@@ -1,7 +1,7 @@
 "use strict"
 import React from "react";
-import Text from "../src/Text";
-import { COLORS } from "../src/Text";
+import Text from "../components/Text";
+import { COLORS } from "../components/Text";
 import { inlineSection, italicSection, sizeSection } from "./sections";
 
 
