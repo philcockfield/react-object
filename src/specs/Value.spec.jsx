@@ -1,7 +1,6 @@
 "use strict"
 import React from "react";
 import Value from "../components/Value";
-import * as util from "js-util";
 import { lorem } from "js-util/test";
 import { italicSection, sizeSection, objectValueSection, arrayValueSection } from "./sections";
 

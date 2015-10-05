@@ -2,7 +2,7 @@ import R from "ramda";
 import React from "react";
 import { css, PropTypes } from "js-util/react";
 import Text from "./Text";
-import ValuesList from "./ValuesList";
+import ValueList from "./ValueList";
 
 
 const toItems = (value) => {
@@ -37,7 +37,7 @@ export default class Complex extends React.Component {
     // Prepare the value content.
     let elValue;
     if (isExpanded) {
-      elValue = <ValuesList
+      elValue = <ValueList
                     items={ toItems(value) }
                     level={ level }
                     { ...textStyles } />

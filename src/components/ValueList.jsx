@@ -7,7 +7,7 @@ let Value // NB: Lazily required to prevent circular reference.
 
 
 /**
- * A list of values.
+ * A list of <Value>'s.
  */
 @Radium
 export default class ValuesList extends React.Component {
