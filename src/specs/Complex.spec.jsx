@@ -7,12 +7,20 @@ import { inlineSection, italicSection, sizeSection, objectValueSection, arrayVal
 describe("Complex", function() {
   this.header(`## A complex value (object, array).`);
   before(() => {
+    let value = {
+      foo: 123,
+      bar: "hello",
+      baz: { number: -1 }
+    };
+
+    value = [1,2,3];
+
     this
       .align("top left")
       .load(
         <Complex
-            value={{ foo: 123, bar: "hello", baz: { number: -1 }}}
-            isExpanded={true} />
+            value={ value }
+            isExpanded={ false } />
     );
   });
 

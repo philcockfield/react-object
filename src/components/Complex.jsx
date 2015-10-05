@@ -35,21 +35,25 @@ export default class Complex extends React.Component {
     const closeChar = R.is(Array, value) ? "]" : "}";
 
     // Prepare the value content.
-    let elValue;
+    let elContent;
     if (isExpanded) {
-      elValue = <ValueList
+      elContent = <ValueList
                     items={ toItems(value) }
                     level={ level }
                     { ...textStyles } />
     } else {
-      console.log("TODO closed values"); // TODO:
+      if (R.is(Array, value) && value.length > 0) {
+        elContent = <Text color="grey">{ value.length }</Text>
+      } else {
+        console.log("TODO closed values"); // TODO:
+      }
     }
 
     return (
       <span>
         { elLabel }
         <Text { ...textStyles }>{ openChar }</Text>
-        { elValue }
+        { elContent }
         <Text { ...textStyles }>{ closeChar }</Text>
       </span>
     );

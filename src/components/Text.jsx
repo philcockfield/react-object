@@ -7,6 +7,7 @@ export const FONT_MONO = "Menlo, monospace";
 export const COLORS = {
   black: "#000",
   darkGrey: "#303942",
+  grey: "#999999",
   lightGrey: "#C8C8C8",
   red: "#C9214C",
   brown: "#9B4500",
