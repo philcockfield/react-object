@@ -17,14 +17,17 @@ export default class Value extends React.Component {
   }
 
   styles() {
-    const { showTwisty } = this.props;
+    const { showTwisty, inline } = this.props;
     const twistySize = 10;
     const indent = showTwisty === true ? twistySize + 2 : 0
 
     return css({
       base: {
         position: "relative",
-        paddingLeft: indent
+        paddingLeft: indent,
+        display: inline ? "inline-block" : null,
+        marginLeft: this.props.marginLeft,
+        marginRight: this.props.marginRight
       },
       twisty: {
         Absolute: [3, null, null, 0],
@@ -90,18 +93,24 @@ export default class Value extends React.Component {
 
 // API -------------------------------------------------------------------------
 Value.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
+  value: PropTypes.oneOfType([PropTypes.node, PropTypes.bool, PropTypes.object]),
   label: PropTypes.string,
   italic: Text.propTypes.italic,
   size: Text.propTypes.size,
+  inline: PropTypes.bool,
   level: PropTypes.number,
   isExpanded: PropTypes.bool,
-  showTwisty: PropTypes.bool
+  showTwisty: PropTypes.bool,
+  marginLeft: PropTypes.numberOrString,
+  marginRight: PropTypes.numberOrString
 };
 Value.defaultProps = {
   italic: Text.defaultProps.italic,
   size: Text.defaultProps.size,
+  inline: false,
   level: 0,
   isExpanded: false,
-  showTwisty: true
+  showTwisty: true,
+  marginLeft: 0,
+  marginRight: 0
 };

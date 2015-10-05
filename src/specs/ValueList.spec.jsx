@@ -1,11 +1,11 @@
 "use strict"
 import React from "react";
 import ValueList from "../components/ValueList";
-import { italicSection, sizeSection } from "./sections";
+import { inlineSection, italicSection, sizeSection } from "./sections";
 
 
 describe("ValueList", function() {
-  this.header(`## A list of Value's.`);
+  this.header(`## A list of values.`);
   before(() => {
     const items = [
       { label: "one", value: 1 },
@@ -16,7 +16,8 @@ describe("ValueList", function() {
           bar: () => true
         }
       },
-      { label: "three", value: "toru" }
+      { label: "three", value: "toru" },
+      { label: "four" }
     ];
 
     this
@@ -24,6 +25,7 @@ describe("ValueList", function() {
       .load( <ValueList items={ items } /> );
   });
 
+  inlineSection.call(this);
   italicSection.call(this);
   sizeSection.call(this);
 });
