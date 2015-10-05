@@ -6,7 +6,7 @@ import { lorem } from "js-util/test";
 import { italicSection, sizeSection, objectValueSection, arrayValueSection } from "./sections";
 
 
-describe("Value (Main)", function() {
+describe("Value", function() {
   this.header("## A single value of any type.");
   before(() => {
     this
