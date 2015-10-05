@@ -1,5 +1,6 @@
 "use strict"
 var gulp = require("gulp");
+var plumber = require('gulp-plumber');
 var eslint = require("gulp-eslint");
 var babel = require("gulp-babel");
 var SOURCE_PATH = ["./src/**/*.js", "./src/**/*.jsx"];
@@ -7,6 +8,7 @@ var SOURCE_PATH = ["./src/**/*.js", "./src/**/*.jsx"];
 
 gulp.task("build", function() {
   return gulp.src(SOURCE_PATH)
+             .pipe(plumber())
              .pipe(babel({ stage: 1 }))
              .pipe(gulp.dest("lib"));
 });
