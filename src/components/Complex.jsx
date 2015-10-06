@@ -3,17 +3,28 @@ import React from "react";
 import { css, PropTypes } from "js-util/react";
 import Text from "./Text";
 import ValueList from "./ValueList";
+import { isPrimitive } from "./Primitive";
+
+const ellipsis = <Text color="lightGrey" italic>…</Text>
 
 
-const toItems = (value) => {
-    const toItem = (key) => {
-      return {
-        label: key,
-        value: value[key]
-      };
+const toProps = (value) => {
+    const toProp = (key) => {
+        return {
+          label: key,
+          value: value[key]
+        };
     };
-    return R.pipe(R.keys, R.map(toItem))(value);
+    return R.pipe(R.keys, R.map(toProp))(value);
   };
+
+
+const toPrimitiveProps = (value) => {
+    const isPrimitiveProp = (prop) => isPrimitive(prop.value);
+    return R.filter(isPrimitiveProp, toProps(value));
+  };
+
+
 
 
 /**
@@ -23,10 +34,11 @@ export default class Complex extends React.Component {
   render() {
     let { label, value, isExpanded, italic, size, level } = this.props;
     const textStyles = { italic, size };
+    let braceMargin = 0;
 
     // Prepare the label.
     if (label === true) {
-      // Only use custom object names.
+      // Only show labels for custom object names (eg. Classes).
       label = value.constructor.name;
       if (R.any(R.equals(label), ["Object", "Array"])) { label = null; }
     }
@@ -38,23 +50,37 @@ export default class Complex extends React.Component {
     let elContent;
     if (isExpanded) {
       elContent = <ValueList
-                    items={ toItems(value) }
+                    items={ toProps(value) }
                     level={ level }
                     { ...textStyles } />
     } else {
       if (R.is(Array, value) && value.length > 0) {
-        elContent = <Text color="grey">{ value.length }</Text>
+        // Show array length, eg: "[2]".
+        elContent = <Text color="grey" italic={italic}>{ value.length }</Text>
       } else {
-        console.log("TODO closed values"); // TODO:
+        // Show flat list of primitive props, eg: { foo:123 }.
+        const totalProps = R.keys(value).length;
+        if (totalProps > 0) {
+          const primitiveProps = toPrimitiveProps(value);
+          const hasProps = primitiveProps.length > 0;
+          braceMargin = hasProps ? 3 : 0;
+          elContent = hasProps
+            ? <ValueList
+                items={ primitiveProps }
+                level={ level }
+                inline={ true }
+                { ...textStyles } />
+            : ellipsis;
+        }
       }
     }
 
     return (
       <span>
         { elLabel }
-        <Text { ...textStyles }>{ openChar }</Text>
+        <Text { ...textStyles } marginRight={ braceMargin }>{ openChar }</Text>
         { elContent }
-        <Text { ...textStyles }>{ closeChar }</Text>
+        <Text { ...textStyles } marginLeft={ braceMargin }>{ closeChar }</Text>
       </span>
     );
   }

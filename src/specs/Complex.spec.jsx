@@ -10,10 +10,11 @@ describe("Complex", function() {
     let value = {
       foo: 123,
       bar: "hello",
-      baz: { number: -1 }
+      baz: { number: -1 },
+      fn: () => true
     };
 
-    value = [1,2,3];
+    // value = [1,2,3];
 
     this
       .align("top left")

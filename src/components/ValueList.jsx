@@ -17,14 +17,16 @@ export default class ValueList extends React.Component {
   }
 
   styles() {
+    const { inline } = this.props;
     return css({
       base: {
+        display: inline ? "inline-block" : null,
         listStyleType: "none",
         margin: 0,
         paddingTop: 0,
         paddingRight: 0,
         paddingBottom: 0,
-        paddingLeft: "0.2em",
+        paddingLeft: inline ? 0 : "0.2em",
         fontSize: this.props.size,
         fontStyle: this.props.italic ? "italic" : "normal",
       },
