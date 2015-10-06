@@ -38,6 +38,15 @@ export const objectValueSection = function () {
     it("`{}`", () => this.props({ value: {}}));
     it("`{ foo, bar }`", () => this.props({ value: { foo: 123, bar: "hello", baz: { number: -1 }}}));
     it("`MyClass{}`", () => this.props({ value: new MyClass() }));
+    it("`complex`", () => {
+
+      const obj = {
+        number: -9999
+      };
+
+      this.props({ value: obj });
+
+    });
   });
 };
 

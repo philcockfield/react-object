@@ -27,6 +27,7 @@ describe("Value", function() {
   section("showTwisty", () => {
     it("`true`", () => this.props({ showTwisty:true }));
     it("`false`", () => this.props({ showTwisty:false }));
+    it("`undefined`", () => this.props({ showTwisty:undefined }));
   });
 
 

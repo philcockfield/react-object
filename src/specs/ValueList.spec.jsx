@@ -19,7 +19,8 @@ describe("ValueList", function() {
       { label: "three", value: "toru" },
       { label: "four" },
       { label: "five", value: { simple: 1 } },
-      { label: "six", value: [] }
+      { label: "six", value: [] },
+      { label: "seven", value: {} },
     ];
 
     this

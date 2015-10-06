@@ -6,7 +6,7 @@ import Text from "./Text";
 import ValueList from "./ValueList";
 import { isPrimitive } from "./Primitive";
 
-const ellipsis = <Text color="lightGrey" italic>...</Text>
+const ellipsis = <Text color="lightGrey" italic>..</Text>
 
 
 const toProps = (value) => {

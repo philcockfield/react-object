@@ -1,3 +1,4 @@
+import R from "ramda";
 import React from "react";
 import Radium from "radium";
 import { css, PropTypes } from "js-util/react";
@@ -5,6 +6,14 @@ import Text from "./Text";
 import Twisty from "react-atoms/components/Twisty";
 import Primitive, { isPrimitive } from "./Primitive";
 import Complex from "./Complex";
+
+
+const isEmptyObjectOrArray = (value) => {
+  if (R.is(Object, value)) { return R.keys(value).length === 0; }
+  if (R.is(Array, value)) { return value.length === 0; }
+  return false;
+};
+
 
 
 /**
@@ -17,10 +26,12 @@ export default class Value extends React.Component {
   }
 
   styles() {
-    const { showTwisty, inline } = this.props;
+    const { inline, value } = this.props;
+    const showTwisty = this.showTwisty();
     const { isExpanded } = this.state;
     const twistySize = 10;
     const indent = showTwisty === true ? twistySize + 2 : 0
+    const canExpand = showTwisty && !isExpanded && !this.isPrimitive() && !isEmptyObjectOrArray(value);
 
     return css({
       base: {
@@ -29,7 +40,7 @@ export default class Value extends React.Component {
         display: inline ? "inline-block" : null,
         marginLeft: this.props.marginLeft,
         marginRight: this.props.marginRight,
-        cursor: (showTwisty && !isExpanded && !this.isPrimitive()) ? "pointer" : null
+        cursor: canExpand ? "pointer" : null
       },
       twisty: {
         Absolute: [3, null, null, 0],
@@ -42,6 +53,18 @@ export default class Value extends React.Component {
   isPrimitive() { return isPrimitive(this.props.value) }
 
 
+  showTwisty() {
+    let result = this.props.showTwisty;
+    if (result === undefined) {
+      const { value } = this.props;
+      if (!isPrimitive(value) && !isEmptyObjectOrArray(value)) {
+        result = true;
+      }
+    }
+    return result;
+  }
+
+
   handleToggleClick(e) {
     this.setState({ isExpanded: !this.state.isExpanded })
   }
@@ -49,10 +72,15 @@ export default class Value extends React.Component {
 
   render() {
     const styles = this.styles();
-    const { label, italic, size, value, level, showTwisty } = this.props;
+    const { label, italic, size, value, level } = this.props;
     const { isExpanded } = this.state;
     const textProps = { italic, size };
     const isPrimitive = this.isPrimitive();
+    let showTwisty = this.showTwisty();
+
+    if (isEmptyObjectOrArray(value)) {
+      showTwisty = false;
+    }
 
     let elTwisty, handleToggleClick;
     if (showTwisty === true && !isPrimitive) {
@@ -97,7 +125,7 @@ export default class Value extends React.Component {
 
 // API -------------------------------------------------------------------------
 Value.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.node, PropTypes.bool, PropTypes.object]),
+  value: PropTypes.any,
   label: PropTypes.string,
   italic: Text.propTypes.italic,
   size: Text.propTypes.size,
@@ -114,7 +142,6 @@ Value.defaultProps = {
   inline: false,
   level: 0,
   isExpanded: false,
-  showTwisty: true,
   marginLeft: 0,
   marginRight: 0
 };
