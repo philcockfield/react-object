@@ -8,11 +8,12 @@ import { italicSection, sizeSection, objectValueSection, arrayValueSection } fro
 describe("Value", function() {
   this.header("## A single value of any type.");
   before(() => {
+    const value = { foo: 123, bar: { baz: "hello" }};
     this
       .align("top left")
       .load( <Value
                 label="foo"
-                value={{ foo: 123, bar: { baz: "hello" }}}/>
+                value={ value }/>
       );
   });
 
