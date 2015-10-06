@@ -33,7 +33,7 @@ export default class Text extends React.Component {
         color: COLORS[this.props.color],
         marginLeft: this.props.marginLeft,
         marginRight: this.props.marginRight,
-        cursor: this.props.onClick ? "pointer" : "default"
+        cursor: this.props.onClick ? "pointer" : null
       }
     });
   }

@@ -1,11 +1,12 @@
 import R from "ramda";
 import React from "react";
+import Radium from "radium";
 import { css, PropTypes } from "js-util/react";
 import Text from "./Text";
 import ValueList from "./ValueList";
 import { isPrimitive } from "./Primitive";
 
-const ellipsis = <Text color="lightGrey" italic>…</Text>
+const ellipsis = <Text color="lightGrey" italic>...</Text>
 
 
 const toProps = (value) => {
@@ -30,8 +31,19 @@ const toPrimitiveProps = (value) => {
 /**
  * A complex value (Object, Array).
  */
+@Radium
 export default class Complex extends React.Component {
+  styles() {
+    return css({
+      base: {
+        cursor: this.props.onClick ? "pointer" : null
+      }
+    });
+  }
+
+
   render() {
+    const styles = this.styles();
     let { label, value, isExpanded, italic, size, level } = this.props;
     const textStyles = { italic, size };
     let braceMargin = 0;
@@ -76,7 +88,7 @@ export default class Complex extends React.Component {
     }
 
     return (
-      <span>
+      <span style={ styles.base }>
         { elLabel }
         <Text { ...textStyles } marginRight={ braceMargin }>{ openChar }</Text>
         { elContent }
@@ -100,6 +112,7 @@ Complex.propTypes = {
   collapsedStyle: PropTypes.shape({ italic: Text.propTypes.italic }),
   italic: Text.propTypes.italic,
   size: Text.propTypes.size,
+  onClick: PropTypes.func,
 };
 Complex.defaultProps = {
   label: true,

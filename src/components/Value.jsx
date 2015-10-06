@@ -18,6 +18,7 @@ export default class Value extends React.Component {
 
   styles() {
     const { showTwisty, inline } = this.props;
+    const { isExpanded } = this.state;
     const twistySize = 10;
     const indent = showTwisty === true ? twistySize + 2 : 0
 
@@ -27,7 +28,8 @@ export default class Value extends React.Component {
         paddingLeft: indent,
         display: inline ? "inline-block" : null,
         marginLeft: this.props.marginLeft,
-        marginRight: this.props.marginRight
+        marginRight: this.props.marginRight,
+        cursor: (showTwisty && !isExpanded && !this.isPrimitive()) ? "pointer" : null
       },
       twisty: {
         Absolute: [3, null, null, 0],
@@ -40,7 +42,7 @@ export default class Value extends React.Component {
   isPrimitive() { return isPrimitive(this.props.value) }
 
 
-  handleTwistyClick(e) {
+  handleToggleClick(e) {
     this.setState({ isExpanded: !this.state.isExpanded })
   }
 
@@ -52,36 +54,38 @@ export default class Value extends React.Component {
     const textProps = { italic, size };
     const isPrimitive = this.isPrimitive();
 
-    let elTwisty, handleTwistyClick;
+    let elTwisty, handleToggleClick;
     if (showTwisty === true && !isPrimitive) {
-      handleTwistyClick = this.handleTwistyClick.bind(this);
+      handleToggleClick = this.handleToggleClick.bind(this);
       elTwisty =  <div style={ styles.twisty }>
                     <Twisty
                         isOpen={ isExpanded }
-                        onClick={ handleTwistyClick }/>
+                        onClick={ handleToggleClick }/>
                   </div>
     }
 
     const elLabel = label && <Text
                                 color="purple"
-                                onClick={ handleTwistyClick }
+                                onClick={ handleToggleClick }
                                 { ...textProps }>{ label }</Text>;
 
 
     let elValue;
     if (isPrimitive) {
+      // Simple value (string, number, bool).
       elValue = <Primitive value={ value } { ...textProps }/>;
     } else {
+      // Complex value (object, array).
       elValue = <Complex
-                  value={ value }
-                  level={ level }
-                  label={ level === 0 }
-                  isExpanded={ isExpanded }
-                  { ...textProps }/>;
+                    value={ value }
+                    level={ level }
+                    label={ level === 0 }
+                    isExpanded={ isExpanded }
+                    { ...textProps }/>;
     }
 
     return (
-      <div style={ styles.base }>
+      <div style={ styles.base } onClick={ !isExpanded && handleToggleClick }>
         { elTwisty }
         { elLabel }
         { elLabel && <Text { ...textProps } marginRight={4}>:</Text> }

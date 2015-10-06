@@ -28,7 +28,7 @@ export default class ValueList extends React.Component {
         paddingBottom: 0,
         paddingLeft: inline ? 0 : "0.2em",
         fontSize: this.props.size,
-        fontStyle: this.props.italic ? "italic" : "normal",
+        fontStyle: this.props.italic ? "italic" : "normal"
       },
       li: {
         display: this.props.inline ? "inline" : null
@@ -68,7 +68,6 @@ export default class ValueList extends React.Component {
             );
         }
     });
-
 
     return <ul style={ styles.base }>{ items }</ul>
   }
