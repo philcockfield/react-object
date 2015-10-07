@@ -15,7 +15,9 @@ Visual representation of javascript objects and values.
 - editable
 
 
-## Run Preview in the [UIHarness](http://uiharness.com/)
+## Explore API in the [UIHarness](http://uiharness.com/)
+    git clone https://github.com/philcockfield/react-object
+    cd react-object
     npm install
     npm start
 
