@@ -4,9 +4,9 @@ import Radium from "radium";
 import { css, PropTypes } from "js-util/react";
 import Text from "./Text";
 import ValueList from "./ValueList";
+import Ellipsis from "./Ellipsis";
 import { isPrimitive } from "./Primitive";
 
-const ellipsis = <Text color="lightGrey" italic>..</Text>
 
 
 const toProps = (value) => {
@@ -82,7 +82,7 @@ export default class Complex extends React.Component {
                 level={ level }
                 inline={ true }
                 { ...textStyles } />
-            : ellipsis;
+              : <Ellipsis/>;
         }
       }
     }

@@ -33,7 +33,8 @@ export default class Text extends React.Component {
         color: COLORS[this.props.color],
         marginLeft: this.props.marginLeft,
         marginRight: this.props.marginRight,
-        cursor: this.props.onClick ? "pointer" : null
+        cursor: this.props.onClick ? "pointer" : null,
+        letterSpacing: this.props.letterSpacing
       }
     });
   }
@@ -63,6 +64,7 @@ Text.propTypes = {
   color: PropTypes.oneOf(Object.keys(COLORS)),
   marginLeft: PropTypes.numberOrString,
   marginRight: PropTypes.numberOrString,
+  letterSpacing: PropTypes.numberOrString,
   onClick: PropTypes.func,
 };
 Text.defaultProps = {
@@ -71,5 +73,6 @@ Text.defaultProps = {
   size: 12,
   color: "darkGrey",
   marginLeft: 0,
-  marginRight: 0
+  marginRight: 0,
+  letterSpacing: "normal"
 };

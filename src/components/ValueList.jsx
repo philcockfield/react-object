@@ -3,7 +3,10 @@ import React from "react";
 import Radium from "radium";
 import { css, PropTypes } from "js-util/react";
 import Text from "./Text";
-let Value // NB: Lazily required to prevent circular reference.
+import Ellipsis from "./Ellipsis";
+let Value // NB: Lazily required to prevent circular-reference.
+
+export const ELLIPSIS = Symbol("ellipsis");
 
 
 /**
@@ -44,9 +47,13 @@ export default class ValueList extends React.Component {
     this.props.items.forEach((item, i) => {
         // Insert the <Value>.
         const isLast = i === total - 1;
-        items.push(
-          <li key={i} style={ styles.li }>
-            <Value
+        const isEllipsis = item === ELLIPSIS;
+        const isNextEllipsis = this.props.items[i + 1] === ELLIPSIS;
+        const el = (isEllipsis)
+            ? <Ellipsis
+                marginLeft={ inline ? 6 : 12 }
+                marginRight={ (inline && !isLast) ? 6 : 0 }/>
+            : <Value
                 label={ item.label }
                 value={ item.value }
                 level={ this.props.level + 1 }
@@ -54,11 +61,11 @@ export default class ValueList extends React.Component {
                 size={ this.props.size }
                 italic={ this.props.italic }
                 inline={ this.props.inline }
-                showTwisty={ !inline }/>
-          </li>);
+                showTwisty={ !inline }/>;
+        items.push(<li key={i} style={ styles.li }>{ el }</li>);
 
-        // Inert comma divider.
-        if (inline && !isLast) {
+        // Inert dividing comma.
+        if (inline && !isLast && !isEllipsis && !isNextEllipsis) {
           items.push(
             <Text
                 key={ `${ i }-comma` }
