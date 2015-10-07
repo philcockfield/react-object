@@ -3,28 +3,43 @@ import React from "react";
 import Radium from "radium";
 import { css, PropTypes } from "js-util/react";
 import Text from "./Text";
-import ValueList from "./ValueList";
+import ValueList, { ELLIPSIS } from "./ValueList";
 import Ellipsis from "./Ellipsis";
 import { isPrimitive } from "./Primitive";
 
 
+const toProp = (label, value) => ({ label, value });
 
-const toProps = (value) => {
-    const toProp = (key) => {
-        return {
-          label: key,
-          value: value[key]
-        };
-    };
-    return R.pipe(R.keys, R.map(toProp))(value);
+
+const toObjectProps = (obj) => {
+    const toObjectProp = (key) => toProp(key, obj[key]);
+    return R.pipe(R.keys, R.map(toObjectProp))(obj);
   };
 
 
-const toPrimitiveProps = (value) => {
+const toPrimitiveProps = (obj) => {
     const isPrimitiveProp = (prop) => isPrimitive(prop.value);
-    return R.filter(isPrimitiveProp, toProps(value));
+    return R.filter(isPrimitiveProp, toObjectProps(obj));
   };
 
+
+const toArrayProps = (array, max = 5) => {
+    // Add array items.
+    const subset = array.length === max ? array : R.take(max - 1, array);
+    const items = subset.map((value, i) => toProp(i.toString(), value));
+    if (array.length > max) {
+      items.push(ELLIPSIS);
+      items.push(toProp((array.length - 1).toString(), R.last(array)));
+    }
+
+    // Add any properties on the array.
+    const keys = R.keys(array);
+    const propKeys = R.takeLast(keys.length - array.length, keys);
+    propKeys.forEach(key => items.push(toProp(key, array[key])));
+
+    // Finish up.
+    return items;
+  };
 
 
 
@@ -46,6 +61,7 @@ export default class Complex extends React.Component {
     const styles = this.styles();
     let { label, value, isExpanded, italic, size, level } = this.props;
     const textStyles = { italic, size };
+    const isArray = R.is(Array, value);
     let braceMargin = 0;
 
     // Prepare the label.
@@ -55,22 +71,27 @@ export default class Complex extends React.Component {
       if (R.any(R.equals(label), ["Object", "Array"])) { label = null; }
     }
     const elLabel = label && <Text { ...textStyles } marginRight={4}>{ label }</Text>;
-    const openChar = R.is(Array, value) ? "[" : "{";
-    const closeChar = R.is(Array, value) ? "]" : "}";
+    const openChar = isArray ? "[" : "{";
+    const closeChar = isArray ? "]" : "}";
 
     // Prepare the value content.
     let elContent;
     if (isExpanded) {
+      // Expanded.
+      const items = isArray ? toArrayProps(value) : toObjectProps(value);
       elContent = <ValueList
-                    items={ toProps(value) }
-                    level={ level }
-                    { ...textStyles } />
+                      items={ items }
+                      level={ level }
+                      { ...textStyles } />
+
     } else {
-      if (R.is(Array, value) && value.length > 0) {
-        // Show array length, eg: "[2]".
+
+      // Collapsed.
+      if (isArray && value.length > 0) {
+        // Array: Show length, eg: "[2]".
         elContent = <Text color="grey" italic={italic}>{ value.length }</Text>
       } else {
-        // Show flat list of primitive props, eg: { foo:123 }.
+        // Object: Show flat list of primitive props, eg: { foo:123 }.
         const totalProps = R.keys(value).length;
         if (totalProps > 0) {
           const primitiveProps = toPrimitiveProps(value);
@@ -82,7 +103,7 @@ export default class Complex extends React.Component {
                 level={ level }
                 inline={ true }
                 { ...textStyles } />
-              : <Ellipsis/>;
+            : <Ellipsis/>;
         }
       }
     }

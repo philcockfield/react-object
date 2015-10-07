@@ -11,6 +11,7 @@ describe("Value", function() {
     const value = { foo: 123, bar: { baz: "hello" }};
     this
       .align("top left")
+      .scroll(true)
       .load( <Value
                 label="foo"
                 value={ value }/>
@@ -27,11 +28,11 @@ describe("Value", function() {
   section("showTwisty", () => {
     it("`true`", () => this.props({ showTwisty:true }));
     it("`false`", () => this.props({ showTwisty:false }));
-    it("`undefined`", () => this.props({ showTwisty:undefined }));
+    it("`undefined` (auto)", () => this.props({ showTwisty:undefined }));
   });
 
 
-  section("Primitive Value", () => {
+  section("Primitive", () => {
     it("`string` short", () => this.props({ value: "My String" }));
     it("`string` long", () => this.props({ value: lorem() }));
     it("`number: 123456`", () => this.props({ value: 123456 }));
@@ -45,7 +46,7 @@ describe("Value", function() {
   objectValueSection.call(this);
   arrayValueSection.call(this);
 
-  section("Date Value", () => {
+  section("Date", () => {
     it("`date: now`", () => this.props({ value: new Date() }));
   });
 

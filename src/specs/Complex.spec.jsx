@@ -14,14 +14,16 @@ describe("Complex", function() {
       fn: () => true
     };
 
-    // value = [1,2,3];
+    value = []
+    value = [1,2,3];
+    value.foo = "hello";
 
     this
       .align("top left")
       .load(
         <Complex
             value={ value }
-            isExpanded={ false } />
+            isExpanded={ true } />
     );
   });
 
