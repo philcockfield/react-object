@@ -6,13 +6,7 @@ import Text from "./Text";
 import Twisty from "react-atoms/components/Twisty";
 import Primitive, { isPrimitive } from "./Primitive";
 import Complex from "./Complex";
-
-
-const isEmptyObjectOrArray = (value) => {
-  if (R.is(Object, value)) { return R.keys(value).length === 0; }
-  if (R.is(Array, value)) { return value.length === 0; }
-  return false;
-};
+import { isEmptyObjectOrArray } from "./util";
 
 
 

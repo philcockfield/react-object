@@ -6,6 +6,7 @@ import Text from "./Text";
 import ValueList, { ELLIPSIS } from "./ValueList";
 import Ellipsis from "./Ellipsis";
 import { isPrimitive } from "./Primitive";
+import { isEmptyObjectOrArray } from "./util";
 
 
 const toProp = (label, value) => ({ label, value });
@@ -80,6 +81,7 @@ export default class Complex extends React.Component {
     const textStyles = { italic, size };
     const isArray = R.is(Array, value);
     let braceMargin = 0;
+    if (isExpanded && isEmptyObjectOrArray(value)) { isExpanded = false; }
 
     // Prepare the label.
     if (label === true) {
