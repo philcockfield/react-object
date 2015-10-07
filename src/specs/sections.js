@@ -1,6 +1,9 @@
 import R from "ramda";
 
 
+const array = (total) => R.repeat(null, total).map((item, i) => i);
+
+
 export const inlineSection = function() {
   section("inline", () => {
     it("`inline: true`", () => this.props({ inline: true }));
@@ -40,6 +43,11 @@ export const objectValueSection = function () {
   section("Object", () => {
     it("`{}`", () => this.props({ value: {}}));
     it("`{ foo, bar }`", () => this.props({ value: { foo: 123, bar: "hello", baz: { number: -1 }}}));
+    it("`{ ... }`", () => {
+      const value = {};
+      array(30).forEach(i => value[`prop${i}`] = `value-${ i }`);
+      this.props({ value });
+    });
     it("`MyClass{}`", () => this.props({ value: new MyClass() }));
     it("`complex`", () => {
 
@@ -63,13 +71,7 @@ export const arrayValueSection = function () {
       value.myProp = "foo";
       this.props({ value });
     });
-    it("`[0..5]`", () => {
-      const value = R.repeat(null, 5).map((item, i) => i);
-      this.props({ value });
-    });
-    it("`[0..100]`", () => {
-      const value = R.repeat(null, 100).map((item, i) => i);
-      this.props({ value });
-    });
+    it("`[0..5]`", () => this.props({ value: array(5) }));
+    it("`[0..100]`", () => this.props({ value: array(100) }));
   });
 };

@@ -11,19 +11,19 @@ describe("Complex", function() {
       foo: 123,
       bar: "hello",
       baz: { number: -1 },
-      fn: () => true
+      // fn: () => true
     };
 
-    value = []
-    value = [1,2,3];
-    value.foo = "hello";
+    // value = []
+    // value = [1,2,3];
+    // value.foo = "hello";
 
     this
       .align("top left")
       .load(
         <Complex
             value={ value }
-            isExpanded={ true } />
+            isExpanded={ false } />
     );
   });
 

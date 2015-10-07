@@ -11,26 +11,43 @@ import { isPrimitive } from "./Primitive";
 const toProp = (label, value) => ({ label, value });
 
 
-const toObjectProps = (obj) => {
+const toObjectProps = (obj, max) => {
     const toObjectProp = (key) => toProp(key, obj[key]);
-    return R.pipe(R.keys, R.map(toObjectProp))(obj);
+    let props = R.pipe(R.keys, R.map(toObjectProp))(obj);
+    if (max !== undefined) {
+      props = withinBounds(props, max);
+    }
+    return props;
+
   };
 
 
-const toPrimitiveProps = (obj) => {
+const toPrimitiveProps = (obj, max) => {
     const isPrimitiveProp = (prop) => isPrimitive(prop.value);
-    return R.filter(isPrimitiveProp, toObjectProps(obj));
+    const props = R.filter(isPrimitiveProp, toObjectProps(obj));
+    return withinBounds(props, max)
   };
 
 
-const toArrayProps = (array, max = 5) => {
-    // Add array items.
-    const subset = array.length === max ? array : R.take(max - 1, array);
-    const items = subset.map((value, i) => toProp(i.toString(), value));
+const withinBounds = (array, max) => {
+    max = max === undefined ? array.length : max;
+    const takeTotal = array.length === max ? array.length : max - 1;
+    const items = R.take(takeTotal, array);
     if (array.length > max) {
       items.push(ELLIPSIS);
-      items.push(toProp((array.length - 1).toString(), R.last(array)));
+      items.push(R.last(array));
     }
+    return items;
+  };
+
+
+const toArrayProps = (array, max) => {
+    // Add array items.
+    const items = withinBounds(array, max).map((item, i) => {
+        return item === ELLIPSIS
+          ? item
+          : toProp(i.toString(), item)
+      });
 
     // Add any properties on the array.
     const keys = R.keys(array);
@@ -77,8 +94,8 @@ export default class Complex extends React.Component {
     // Prepare the value content.
     let elContent;
     if (isExpanded) {
-      // Expanded.
-      const items = isArray ? toArrayProps(value) : toObjectProps(value);
+      // -- Expanded --.
+      const items = isArray ? toArrayProps(value, 5) : toObjectProps(value, 50);
       elContent = <ValueList
                       items={ items }
                       level={ level }
@@ -86,7 +103,7 @@ export default class Complex extends React.Component {
 
     } else {
 
-      // Collapsed.
+      // -- Collapsed --.
       if (isArray && value.length > 0) {
         // Array: Show length, eg: "[2]".
         elContent = <Text color="grey" italic={italic}>{ value.length }</Text>
@@ -94,7 +111,7 @@ export default class Complex extends React.Component {
         // Object: Show flat list of primitive props, eg: { foo:123 }.
         const totalProps = R.keys(value).length;
         if (totalProps > 0) {
-          const primitiveProps = toPrimitiveProps(value);
+          const primitiveProps = toPrimitiveProps(value, 3);
           const hasProps = primitiveProps.length > 0;
           braceMargin = hasProps ? 3 : 0;
           elContent = hasProps
