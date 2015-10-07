@@ -6,7 +6,7 @@ Rich visual representation and editor of javascript objects and values.
 
 ## Getting Started
 
-    npm install --save react-object
+    npm install react-object
 
 
 ## TODO
