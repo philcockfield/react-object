@@ -43,9 +43,9 @@ export const objectValueSection = function () {
   section("Object", () => {
     it("`{}`", () => this.props({ value: {}}));
     it("`{ foo, bar }`", () => this.props({ value: { foo: 123, bar: "hello", baz: { number: -1 }}}));
-    it("`{ ... }`", () => {
+    it("`{ 100 }`", () => {
       const value = {};
-      array(30).forEach(i => value[`prop${i}`] = `value-${ i }`);
+      array(100).forEach(i => value[`prop${i}`] = `value-${ i }`);
       this.props({ value });
     });
     it("`MyClass{}`", () => this.props({ value: new MyClass() }));

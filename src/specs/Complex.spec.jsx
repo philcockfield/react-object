@@ -20,6 +20,7 @@ describe("Complex", function() {
 
     this
       .align("top left")
+      .scroll(true)
       .load(
         <Complex
             value={ value }

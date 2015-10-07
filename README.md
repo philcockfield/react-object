@@ -9,9 +9,6 @@ Visual representation of javascript objects and values.
 ## TODO
 - function
 - date
-- ... for arrays (shorten when too long)
-- ... for closed objects (when more than shown)
-- closed object - reduce size to max 5 simple props
 
 
 ## Run in [UIHarness](http://uiharness.com/)
