@@ -3,7 +3,10 @@
 
 Visual representation of javascript objects and values.
 
-![ui-harness](https://cloud.githubusercontent.com/assets/185555/10324272/3254e10c-6c3d-11e5-9ce6-6f9598461313.png)
+
+## Getting Started
+
+    npm install --save react-object
 
 
 ## TODO
@@ -12,6 +15,8 @@ Visual representation of javascript objects and values.
 - editable
 
 
-## Run in [UIHarness](http://uiharness.com/)
+## Run Preview in the [UIHarness](http://uiharness.com/)
     npm install
     npm start
+
+![ui-harness](https://cloud.githubusercontent.com/assets/185555/10324272/3254e10c-6c3d-11e5-9ce6-6f9598461313.png)
