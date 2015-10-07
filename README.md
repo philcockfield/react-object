@@ -9,6 +9,7 @@ Visual representation of javascript objects and values.
 ## TODO
 - function
 - date
+- editable
 
 
 ## Run in [UIHarness](http://uiharness.com/)

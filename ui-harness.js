@@ -1,2 +1,1 @@
-require("babel/register")({ stage: 1 });
-require("ui-harness/server").start();
+require("ui-harness/server").start({ babel:1 });
