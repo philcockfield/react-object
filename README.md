@@ -3,6 +3,13 @@
 
 Rich visual representation and editor of javascript objects and values.
 
+#### Features
+- Color coding pretty printing of objects and primitive values.
+- Expandable to drill into object hierarchy.
+- Abbreviates massive objects/arrays to prevent render slow-down.
+- Rich date notation.
+- Rich function notation (with parameter names).
+
 
 ## Getting Started
 
@@ -15,7 +22,7 @@ Rich visual representation and editor of javascript objects and values.
 - editable
 
 
-## Explore API in the [UIHarness](http://uiharness.com/)
+## Explore the API in the [UIHarness](http://uiharness.com/)
     git clone https://github.com/philcockfield/react-object
     cd react-object
     npm install
