@@ -5,6 +5,7 @@ describe("react-object", function() {
   describe("internal", function() {
     require("./Primitive.spec");
     require("./Complex.spec");
+    require("./Function.spec");
     require("./Text.spec");
   });
 });

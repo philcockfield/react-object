@@ -20,6 +20,9 @@ Rich visual representation and editor of javascript objects and values.
 - function
 - date
 - editable
+- align twisty on text size change.
+- bug: Crashing on complex object in <Value> when too 6 fields.
+- show (...) when collapsed object is not showing all fields.
 
 
 ## Explore the API in the [UIHarness](http://uiharness.com/)

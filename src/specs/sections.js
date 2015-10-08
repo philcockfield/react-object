@@ -50,13 +50,19 @@ export const objectValueSection = function () {
     });
     it("`MyClass{}`", () => this.props({ value: new MyClass() }));
     it("`complex`", () => {
-
-      const obj = {
-        number: -9999
-      };
-
-      this.props({ value: obj });
-
+      // TODO: Bug crashing when extra field added.
+      //       This will be to do with the shortening function probably.
+      this.props({ value: {
+        "1": 1,
+        // "2": 1,
+        // yes: true,
+        // foo: true,
+        // no: false,
+        text: "hello",
+        number: -9999,
+        date: new Date(),
+        fn: (p1, p2) => true
+      }});
     });
   });
 };
@@ -73,5 +79,18 @@ export const arrayValueSection = function () {
     });
     it("`[0..5]`", () => this.props({ value: array(5) }));
     it("`[0..100]`", () => this.props({ value: array(100) }));
+  });
+};
+
+
+
+export const functionValueSection = function() {
+  const fn1 = function myFunc(param1, param2) {};
+  const fn2 = function myFunc() {};
+  section("Function", () => {
+    it("`named with 2 params`", () => this.props({ value: fn1 }));
+    it("`named with no params`", () => this.props({ value: fn2 }));
+    it("`unnamed with 1 param`", () => this.props({ value: (p1) => 0 }));
+    it("`unnamed with no params`", () => this.props({ value: () => true }));
   });
 };

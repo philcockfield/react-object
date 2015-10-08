@@ -2,7 +2,7 @@
 import React from "react";
 import Value from "../components/Value";
 import { lorem } from "js-util/test";
-import { italicSection, sizeSection, objectValueSection, arrayValueSection } from "./sections";
+import { italicSection, sizeSection, objectValueSection, arrayValueSection, functionValueSection } from "./sections";
 
 
 describe("Value", function() {
@@ -50,6 +50,7 @@ describe("Value", function() {
     it("`date: now`", () => this.props({ value: new Date() }));
   });
 
+  functionValueSection.call(this);
   italicSection.call(this);
   sizeSection.call(this);
 });

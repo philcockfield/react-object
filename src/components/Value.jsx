@@ -6,6 +6,7 @@ import Text from "./Text";
 import Twisty from "react-atoms/components/Twisty";
 import Primitive, { isPrimitive } from "./Primitive";
 import Complex from "./Complex";
+import Function from "./Function";
 import { isEmptyObjectOrArray } from "./util";
 
 
@@ -44,7 +45,8 @@ export default class Value extends React.Component {
     });
   }
 
-  isPrimitive() { return isPrimitive(this.props.value) }
+
+  isPrimitive() { return isPrimitive(this.props.value); }
 
 
   showTwisty() {
@@ -60,7 +62,7 @@ export default class Value extends React.Component {
 
 
   handleToggleClick(e) {
-    this.setState({ isExpanded: !this.state.isExpanded })
+    this.setState({ isExpanded: !this.state.isExpanded });
   }
 
 
@@ -91,19 +93,22 @@ export default class Value extends React.Component {
                                 onClick={ handleToggleClick }
                                 { ...textProps }>{ label }</Text>;
 
-
     let elValue;
     if (isPrimitive) {
       // Simple value (string, number, bool).
       elValue = <Primitive value={ value } { ...textProps }/>;
     } else {
       // Complex value (object, array).
-      elValue = <Complex
-                    value={ value }
-                    level={ level }
-                    label={ level === 0 }
-                    isExpanded={ isExpanded }
-                    { ...textProps }/>;
+      if (R.type(value) === "Function") {
+        elValue = <Function value={ value }/>
+      } else {
+        elValue = <Complex
+                      value={ value }
+                      level={ level }
+                      label={ level === 0 }
+                      isExpanded={ isExpanded }
+                      { ...textProps }/>
+      }
     }
 
     return (
