@@ -52,17 +52,26 @@ export const objectValueSection = function () {
     it("`complex`", () => {
       // TODO: Bug crashing when extra field added.
       //       This will be to do with the shortening function probably.
-      this.props({ value: {
+      const value = {
         "1": 1,
-        // "2": 1,
-        // yes: true,
-        // foo: true,
-        // no: false,
+        yes: true,
+        no: false,
         text: "hello",
+        "multi-part name": "value",
         number: -9999,
         date: new Date(),
-        fn: (p1, p2) => true
-      }});
+        fn: (p1, p2) => true,
+        obj: {
+          text: "foo",
+          number: 123,
+          child: {
+            array: array(50)
+          }
+        },
+        array: [1, "two", { three:3 }]
+      };
+
+      this.props({ value });
     });
   });
 };
