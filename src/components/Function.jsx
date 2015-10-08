@@ -1,5 +1,4 @@
 import React from "react";
-import Radium from "radium";
 import { css, PropTypes } from "js-util/react";
 import Text from "./Text";
 import Complex from "./Complex";
@@ -9,16 +8,8 @@ import { functionParameters } from "js-util";
 /**
  * A Function with parameters details.
  */
-@Radium
 export default class Function extends React.Component {
-  styles() {
-    return css({
-      base: {}
-    });
-  }
-
   render() {
-    const styles = this.styles();
     const { value, italic, size } = this.props;
     const textProps = { italic, size };
     const { name } = value;
@@ -35,13 +26,12 @@ export default class Function extends React.Component {
     });
 
     return (
-      <span style={ styles.base }>
+      <span>
         <Text {...textProps} marginRight={ name ? 6 : 3 }>function</Text>
         { elName }
         <Text {...textProps}>(</Text>
         { params }
-        <Text {...textProps}>) {"{"}</Text>
-        <Text {...textProps}>{"}"}</Text>
+        <Text {...textProps}>)</Text>
       </span>
     );
   }
