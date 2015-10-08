@@ -9,7 +9,7 @@ Rich visual representation and editor of javascript objects and values.
 #### Features
 - Color highlighted pretty-printing of objects and primitive values.
 - Expandable to drill into object and array hierarchy.
-- Abbreviates massive objects/arrays to prevent render slow-down.
+- Abbreviates large objects/arrays to prevent render slow-down.
 - Rich date notation.
 - Rich function notation (with parameter names).
 
