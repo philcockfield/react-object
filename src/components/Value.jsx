@@ -75,7 +75,7 @@ export default class Value extends React.Component {
     const styles = this.styles();
     const { label, italic, size, value, level } = this.props;
     const { isExpanded } = this.state;
-    const textProps = { italic, size };
+    const textStyles = { italic, size };
     const isPrimitive = this.isPrimitive();
     let showTwisty = this.showTwisty();
 
@@ -102,23 +102,24 @@ export default class Value extends React.Component {
     const elLabel = label && <Text
                                 color="purple"
                                 onClick={ handleToggleClick }
-                                { ...textProps }>{ label }</Text>;
+                                { ...textStyles }>{ label }</Text>;
 
     let elValue;
     if (isPrimitive) {
       // Simple value (string, number, bool).
-      elValue = <Primitive value={ value } { ...textProps }/>;
+      elValue = <Primitive value={ value } { ...textStyles }/>;
     } else {
       // Complex value (object, array).
       if (R.type(value) === "Function") {
-        elValue = <Function value={ value }/>
+        elValue = <Function { ...textStyles } value={ value }/>
       } else {
         elValue = <Complex
+                      { ...textStyles }
                       value={ value }
                       level={ level }
                       label={ level === 0 }
                       isExpanded={ isExpanded }
-                      { ...textProps }/>
+                      />
       }
     }
 
@@ -126,7 +127,7 @@ export default class Value extends React.Component {
       <div style={ styles.base } onClick={ !isExpanded && handleToggleClick }>
         { elTwisty }
         { elLabel }
-        { elLabel && <Text { ...textProps } marginRight={4}>:</Text> }
+        { elLabel && <Text { ...textStyles } marginRight={4}>:</Text> }
         { elValue }
       </div>
     );

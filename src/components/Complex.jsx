@@ -108,7 +108,7 @@ export default class Complex extends React.Component {
       // -- Collapsed --.
       if (isArray && value.length > 0) {
         // Array: Show length, eg: "[2]".
-        elContent = <Text color="grey" italic={italic}>{ value.length }</Text>
+        elContent = <Text color="grey" { ...textStyles }>{ value.length }</Text>
       } else {
         // Object: Show flat list of primitive props, eg: { foo:123 }.
         const totalProps = R.keys(value).length;
@@ -122,7 +122,7 @@ export default class Complex extends React.Component {
                 level={ level }
                 inline={ true }
                 { ...textStyles } />
-            : <Ellipsis/>;
+            : <Ellipsis { ...textStyles }/>;
         }
       }
     }
