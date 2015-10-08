@@ -3,6 +3,9 @@
 
 Rich visual representation and editor of javascript objects and values.
 
+![Example](https://cloud.githubusercontent.com/assets/185555/10372121/4667a0b2-6d9b-11e5-952f-7bc119b1b040.png)
+
+
 #### Features
 - Color coding pretty printing of objects and primitive values.
 - Expandable to drill into object hierarchy.
