@@ -20,7 +20,6 @@ Rich visual representation and editor of javascript objects and values.
 - date
 - editable
 - align twisty on text size change.
-- bug: Crashing on complex object in <Value> when over the min fields.
 - show ellipsis when collapsed object is not showing all fields.
 
 

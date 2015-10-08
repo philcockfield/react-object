@@ -50,8 +50,7 @@ export const objectValueSection = function () {
     });
     it("`MyClass{}`", () => this.props({ value: new MyClass() }));
     it("`complex`", () => {
-      // TODO: Bug crashing when extra field added.
-      //       This will be to do with the shortening function probably.
+
       const value = {
         "1": 1,
         yes: true,
