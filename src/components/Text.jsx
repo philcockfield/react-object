@@ -29,7 +29,7 @@ export default class Text extends React.Component {
         fontSize: this.props.size,
         fontWeight: "normal",
         fontStyle: this.props.italic === true ? "italic" : "normal",
-        lineHeight: "1.4em",
+        lineHeight: this.props.lineHeight,
         color: COLORS[this.props.color],
         marginLeft: this.props.marginLeft,
         marginRight: this.props.marginRight,
@@ -65,6 +65,7 @@ Text.propTypes = {
   marginLeft: PropTypes.numberOrString,
   marginRight: PropTypes.numberOrString,
   letterSpacing: PropTypes.numberOrString,
+  lineHeight: PropTypes.numberOrString,
   onClick: PropTypes.func,
 };
 Text.defaultProps = {
@@ -74,5 +75,6 @@ Text.defaultProps = {
   color: "darkGrey",
   marginLeft: 0,
   marginRight: 0,
-  letterSpacing: "normal"
+  letterSpacing: "normal",
+  lineHeight: "1.4em"
 };

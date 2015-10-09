@@ -41,7 +41,8 @@ export default class ValueList extends React.Component {
 
   render() {
     const styles = this.styles();
-    const { inline } = this.props;
+    const { inline, size, italic } = this.props;
+    const textStyles = { italic, size };
     const total = this.props.items.length;
     const items = [];
     this.props.items.forEach((item, i) => {
@@ -51,17 +52,17 @@ export default class ValueList extends React.Component {
         const isNextEllipsis = this.props.items[i + 1] === ELLIPSIS;
         const el = (isEllipsis)
             ? <Ellipsis
-                marginLeft={ inline ? 6 : 12 }
-                marginRight={ (inline && !isLast) ? 6 : 0 }/>
+                  { ...textStyles }
+                  marginLeft={ inline ? 6 : 12 }
+                  marginRight={ (inline && !isLast) ? 6 : 0 }/>
             : <Value
-                label={ item.label }
-                value={ item.value }
-                level={ this.props.level + 1 }
-                isExpanded={ false }
-                size={ this.props.size }
-                italic={ this.props.italic }
-                inline={ this.props.inline }
-                showTwisty={ !inline }/>;
+                  { ...textStyles }
+                  label={ item.label }
+                  value={ item.value }
+                  level={ this.props.level + 1 }
+                  isExpanded={ false }
+                  inline={ this.props.inline }
+                  showTwisty={ !inline }/>;
         items.push(<li key={i} style={ styles.li }>{ el }</li>);
 
         // Inert dividing comma.
@@ -69,8 +70,8 @@ export default class ValueList extends React.Component {
           items.push(
             <Text
                 key={ `${ i }-comma` }
+                { ...textStyles }
                 color="darkGrey"
-                italic={ this.props.italic }
                 marginRight={8}>,</Text>
             );
         }

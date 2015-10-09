@@ -22,10 +22,10 @@ export default class Value extends React.Component {
 
   styles() {
     const { inline, value } = this.props;
-    const showTwisty = this.showTwisty();
     const { isExpanded } = this.state;
-    const twistySize = 10;
-    const indent = showTwisty === true ? twistySize + 2 : 0
+    const showTwisty = this.showTwisty();
+    const twistyWidth = 10;
+    const indent = showTwisty === true ? twistyWidth + 2 : 0
     const canExpand = showTwisty && !isExpanded && !this.isPrimitive() && !isEmptyObjectOrArray(value);
 
     return css({
@@ -37,10 +37,15 @@ export default class Value extends React.Component {
         marginRight: this.props.marginRight,
         cursor: canExpand ? "pointer" : null
       },
-      twisty: {
-        Absolute: [3, null, null, 0],
-        width: twistySize,
-        height: twistySize
+      twistyOuter: {
+        Absolute: [0, null, null, 0],
+        width: twistyWidth,
+        fontSize: this.props.size,
+        lineHeight: Text.defaultProps.lineHeight
+      },
+      twistyAlign: {
+        AbsoluteCenter: "y",
+        width: twistyWidth
       }
     });
   }
@@ -70,7 +75,7 @@ export default class Value extends React.Component {
     const styles = this.styles();
     const { label, italic, size, value, level } = this.props;
     const { isExpanded } = this.state;
-    const textProps = { italic, size };
+    const textStyles = { italic, size };
     const isPrimitive = this.isPrimitive();
     let showTwisty = this.showTwisty();
 
@@ -81,33 +86,40 @@ export default class Value extends React.Component {
     let elTwisty, handleToggleClick;
     if (showTwisty === true && !isPrimitive) {
       handleToggleClick = this.handleToggleClick.bind(this);
-      elTwisty =  <div style={ styles.twisty }>
-                    <Twisty
-                        isOpen={ isExpanded }
-                        onClick={ handleToggleClick }/>
+      // NB: Add the "zero width non-joiner" (\u200C) character to force the
+      //     height of the twisty container to the height of the label.
+      elTwisty =  <div style={ styles.twistyOuter }>
+                    <div style={ styles.twistyAlign }>
+                      <Twisty
+                          isOpen={ isExpanded }
+                          onClick={ handleToggleClick }
+                          />
+                    </div>
+                    { "\u200C" }
                   </div>
     }
 
     const elLabel = label && <Text
                                 color="purple"
                                 onClick={ handleToggleClick }
-                                { ...textProps }>{ label }</Text>;
+                                { ...textStyles }>{ label }</Text>;
 
     let elValue;
     if (isPrimitive) {
       // Simple value (string, number, bool).
-      elValue = <Primitive value={ value } { ...textProps }/>;
+      elValue = <Primitive value={ value } { ...textStyles }/>;
     } else {
       // Complex value (object, array).
       if (R.type(value) === "Function") {
-        elValue = <Function value={ value }/>
+        elValue = <Function { ...textStyles } value={ value }/>
       } else {
         elValue = <Complex
+                      { ...textStyles }
                       value={ value }
                       level={ level }
                       label={ level === 0 }
                       isExpanded={ isExpanded }
-                      { ...textProps }/>
+                      />
       }
     }
 
@@ -115,7 +127,7 @@ export default class Value extends React.Component {
       <div style={ styles.base } onClick={ !isExpanded && handleToggleClick }>
         { elTwisty }
         { elLabel }
-        { elLabel && <Text { ...textProps } marginRight={4}>:</Text> }
+        { elLabel && <Text { ...textStyles } marginRight={4}>:</Text> }
         { elValue }
       </div>
     );

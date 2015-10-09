@@ -11,7 +11,6 @@ export default class Ellipsis extends React.Component {
     return (
       <Text
           { ...this.props }
-          italic
           color="lightGrey"
           letterSpacing="-0.1em">...</Text>
     );

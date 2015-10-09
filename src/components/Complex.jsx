@@ -25,8 +25,12 @@ const toObjectProps = (obj, max) => {
 
 const toPrimitiveProps = (obj, max) => {
     const isPrimitiveProp = (prop) => isPrimitive(prop.value);
-    const props = R.filter(isPrimitiveProp, toObjectProps(obj));
-    return withinBounds(props, max)
+    let props = R.filter(isPrimitiveProp, toObjectProps(obj));
+    props = withinBounds(props, max);
+    if (R.keys(obj).length > props.length && !R.any(R.equals(ELLIPSIS), props)) {
+      props.push(ELLIPSIS);
+    }
+    return props;
   };
 
 
@@ -108,7 +112,7 @@ export default class Complex extends React.Component {
       // -- Collapsed --.
       if (isArray && value.length > 0) {
         // Array: Show length, eg: "[2]".
-        elContent = <Text color="grey" italic={italic}>{ value.length }</Text>
+        elContent = <Text color="grey" { ...textStyles }>{ value.length }</Text>
       } else {
         // Object: Show flat list of primitive props, eg: { foo:123 }.
         const totalProps = R.keys(value).length;
@@ -122,7 +126,7 @@ export default class Complex extends React.Component {
                 level={ level }
                 inline={ true }
                 { ...textStyles } />
-            : <Ellipsis/>;
+            : <Ellipsis { ...textStyles }/>;
         }
       }
     }
