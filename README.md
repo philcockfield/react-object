@@ -22,7 +22,6 @@ Rich visual representation and editor of javascript objects and values.
 ## TODO
 - date
 - editable
-- align twisty on text size change.
 - show ellipsis when collapsed object is not showing all fields.
 
 
