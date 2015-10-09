@@ -22,7 +22,6 @@ Rich visual representation and editor of javascript objects and values.
 ## TODO
 - date
 - editable
-- show ellipsis when collapsed object is not showing all fields.
 
 
 ## Explore the API in the [UIHarness](http://uiharness.com/)

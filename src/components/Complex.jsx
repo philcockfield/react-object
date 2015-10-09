@@ -25,8 +25,12 @@ const toObjectProps = (obj, max) => {
 
 const toPrimitiveProps = (obj, max) => {
     const isPrimitiveProp = (prop) => isPrimitive(prop.value);
-    const props = R.filter(isPrimitiveProp, toObjectProps(obj));
-    return withinBounds(props, max)
+    let props = R.filter(isPrimitiveProp, toObjectProps(obj));
+    props = withinBounds(props, max);
+    if (R.keys(obj).length > props.length && !R.any(R.equals(ELLIPSIS), props)) {
+      props.push(ELLIPSIS);
+    }
+    return props;
   };
 
 
