@@ -24,7 +24,7 @@ Rich visual representation and editor of javascript objects and values.
 
 
 ## Explore the API in the [UIHarness](http://uiharness.com/)
-    git clone https://github.com/philcockfield/react-object
+    git clone https://github.com/philcockfield/react-object.git
     cd react-object
     npm install
     npm start
