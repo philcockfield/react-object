@@ -20,7 +20,6 @@ Rich visual representation and editor of javascript objects and values.
 
 
 ## TODO
-- date
 - editable
 
 

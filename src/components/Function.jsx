@@ -1,7 +1,6 @@
 import React from "react";
 import { css, PropTypes } from "js-util/react";
 import Text from "./Text";
-import Complex from "./Complex";
 import { functionParameters } from "js-util";
 
 

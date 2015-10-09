@@ -19,7 +19,7 @@ describe("Value", function() {
   });
 
 
-  section("`label`", () => {
+  section("label", () => {
     it("`null`", () => this.props({ label: null }));
     it("`'foo'`", () => this.props({ label: "foo" }));
   });

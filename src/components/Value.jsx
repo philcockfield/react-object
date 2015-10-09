@@ -6,7 +6,8 @@ import Text from "./Text";
 import Twisty from "react-atoms/components/Twisty";
 import Primitive, { isPrimitive } from "./Primitive";
 import Complex from "./Complex";
-import Function from "./Function";
+import FunctionComponent from "./Function";
+import DateComponent from "./Date";
 import { isEmptyObjectOrArray } from "./util";
 
 
@@ -110,8 +111,10 @@ export default class Value extends React.Component {
       elValue = <Primitive value={ value } { ...textStyles }/>;
     } else {
       // Complex value (object, array).
-      if (R.type(value) === "Function") {
-        elValue = <Function { ...textStyles } value={ value }/>
+      if (R.is(Function, value)) {
+        elValue = <FunctionComponent { ...textStyles } value={ value }/>
+      } else if (R.is(Date, value)) {
+        elValue = <DateComponent { ...textStyles } value={ value }/>
       } else {
         elValue = <Complex
                       { ...textStyles }

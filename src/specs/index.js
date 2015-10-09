@@ -6,6 +6,7 @@ describe("react-object", function() {
     require("./Primitive.spec");
     require("./Complex.spec");
     require("./Function.spec");
+    require("./Date.spec");
     require("./Text.spec");
   });
 });
