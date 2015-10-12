@@ -18,6 +18,23 @@ Rich visual representation and editor of javascript objects and values.
 
     npm install react-object
 
+Render a complex object:
+
+```js
+import Value from "react-object";
+
+const obj = { foo: 123, bar: { baz: "hello" }};
+
+<Value
+    label="foo"
+    value={ obj }/>        
+```
+
+Will yield:
+
+![Value](https://cloud.githubusercontent.com/assets/185555/10420913/2ec14578-70fa-11e5-92be-3f38a07e8e27.png)
+
+
 
 ## TODO
 - editable
