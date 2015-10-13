@@ -10,8 +10,9 @@ import { functionParameters } from "js-util";
 export default class Function extends React.Component {
   render() {
     const { value, italic, size } = this.props;
-    const textProps = { italic, size };
-    const { name } = value;
+    const textProps = { italic: true, size };
+    let { name } = value;
+    name = name === "value" ? "function" : name;
     const elName = name && <Text {...textProps} color="blue">{ name }</Text>;
     const elComma = <Text {...textProps}>,</Text>
     const params = [];
@@ -26,7 +27,6 @@ export default class Function extends React.Component {
 
     return (
       <span>
-        <Text {...textProps} marginRight={ name ? 6 : 3 }>function</Text>
         { elName }
         <Text {...textProps}>(</Text>
         { params }
@@ -39,10 +39,8 @@ export default class Function extends React.Component {
 // API -------------------------------------------------------------------------
 Function.propTypes = {
   value: PropTypes.func.isRequired,
-  italic: Text.propTypes.italic,
   size: Text.propTypes.size,
 };
 Function.defaultProps = {
-  italic: true,
   size: Text.defaultProps.size
 };
