@@ -122,6 +122,7 @@ export default class Value extends React.Component {
                       level={ level }
                       label={ level === 0 }
                       isExpanded={ isExpanded }
+                      collapsedTotal={ this.props.collapsedTotal }
                       />
       }
     }
@@ -148,7 +149,8 @@ Value.propTypes = {
   isExpanded: PropTypes.bool,
   showTwisty: PropTypes.bool,
   marginLeft: PropTypes.numberOrString,
-  marginRight: PropTypes.numberOrString
+  marginRight: PropTypes.numberOrString,
+  collapsedTotal: PropTypes.number, // The number of {object} properties to show when not expanded.
 };
 Value.defaultProps = {
   italic: Text.defaultProps.italic,

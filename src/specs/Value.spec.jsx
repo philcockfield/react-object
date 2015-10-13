@@ -2,7 +2,14 @@
 import React from "react";
 import Value from "../components/Value";
 import { lorem } from "js-util/test";
-import { italicSection, sizeSection, objectValueSection, arrayValueSection, functionValueSection } from "./sections";
+import {
+  italicSection,
+  sizeSection,
+  objectValueSection,
+  arrayValueSection,
+  functionValueSection,
+  collapsedTotalSection
+} from "./sections";
 
 
 describe("Value", function() {
@@ -53,4 +60,5 @@ describe("Value", function() {
   functionValueSection.call(this);
   italicSection.call(this);
   sizeSection.call(this);
+  collapsedTotalSection.call(this);
 });

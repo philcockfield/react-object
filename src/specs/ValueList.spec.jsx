@@ -2,7 +2,12 @@
 import React from "react";
 import ValueList from "../components/ValueList";
 import { ELLIPSIS } from "../components/ValueList";
-import { inlineSection, italicSection, sizeSection } from "./sections";
+import {
+  inlineSection,
+  italicSection,
+  sizeSection,
+  collapsedTotalSection
+} from "./sections";
 
 const DEFAULT_ITEMS = [
   { label: "one", value: 1 },
@@ -53,4 +58,5 @@ describe("ValueList", function() {
   inlineSection.call(this);
   italicSection.call(this);
   sizeSection.call(this);
+  collapsedTotalSection.call(this);
 });

@@ -53,7 +53,7 @@ export default class ValueList extends React.Component {
         const el = (isEllipsis)
             ? <Ellipsis
                   { ...textStyles }
-                  marginLeft={ inline ? 6 : 12 }
+                  marginLeft={ inline ? (isLast ? 0 : 6) : 12 }
                   marginRight={ (inline && !isLast) ? 6 : 0 }/>
             : <Value
                   { ...textStyles }
@@ -62,7 +62,8 @@ export default class ValueList extends React.Component {
                   level={ this.props.level + 1 }
                   isExpanded={ false }
                   inline={ this.props.inline }
-                  showTwisty={ !inline }/>;
+                  showTwisty={ !inline }
+                  collapsedTotal={ this.props.collapsedTotal }/>;
         items.push(<li key={i} style={ styles.li }>{ el }</li>);
 
         // Inert dividing comma.
@@ -87,7 +88,8 @@ ValueList.propTypes = {
   italic: Text.propTypes.italic,
   size: Text.propTypes.size,
   items: PropTypes.array,
-  level: PropTypes.number
+  level: PropTypes.number,
+  collapsedTotal: PropTypes.number, // The number of {object} properties to show when not expanded.
 };
 ValueList.defaultProps = {
   inline: false,

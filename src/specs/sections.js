@@ -103,3 +103,13 @@ export const functionValueSection = function() {
     it("`unnamed with no params`", () => this.props({ value: () => true }));
   });
 };
+
+
+
+export const collapsedTotalSection = function() {
+  section("collapsedTotal", () => {
+    it("`0`", () => this.props({ collapsedTotal: 0 }));
+    it("`1`", () => this.props({ collapsedTotal: 1 }));
+    it("`3`", () => this.props({ collapsedTotal: 3 }));
+  });
+};

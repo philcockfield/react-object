@@ -1,7 +1,14 @@
 "use strict"
 import React from "react";
 import Complex from "../components/Complex";
-import { inlineSection, italicSection, sizeSection, objectValueSection, arrayValueSection } from "./sections";
+import {
+  inlineSection,
+  italicSection,
+  sizeSection,
+  objectValueSection,
+  arrayValueSection,
+  collapsedTotalSection
+} from "./sections";
 
 
 describe("Complex", function() {
@@ -44,5 +51,5 @@ describe("Complex", function() {
 
   italicSection.call(this);
   sizeSection.call(this);
-
+  collapsedTotalSection.call(this);
 });

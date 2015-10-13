@@ -35,12 +35,18 @@ const toPrimitiveProps = (obj, max) => {
 
 
 const withinBounds = (array, max) => {
+    if (max === 0) { return []; }
     max = max === undefined ? array.length : max;
     const takeTotal = array.length === max ? array.length : max - 1;
     const items = R.take(takeTotal, array);
     if (array.length > max) {
-      items.push(ELLIPSIS);
-      items.push(R.last(array));
+      if (max === 1) {
+        items.push(R.last(array));
+        items.push(ELLIPSIS);
+      } else {
+        items.push(ELLIPSIS);
+        items.push(R.last(array));
+      }
     }
     return items;
   };
@@ -105,6 +111,7 @@ export default class Complex extends React.Component {
       elContent = <ValueList
                       items={ items }
                       level={ level }
+                      collapsedTotal={ this.props.collapsedTotal }
                       { ...textStyles } />
 
     } else {
@@ -117,7 +124,7 @@ export default class Complex extends React.Component {
         // Object: Show flat list of primitive props, eg: { foo:123 }.
         const totalProps = R.keys(value).length;
         if (totalProps > 0) {
-          const primitiveProps = toPrimitiveProps(value, 3);
+          const primitiveProps = toPrimitiveProps(value, this.props.collapsedTotal);
           const hasProps = primitiveProps.length > 0;
           braceMargin = hasProps ? 3 : 0;
           elContent = hasProps
@@ -125,6 +132,7 @@ export default class Complex extends React.Component {
                 items={ primitiveProps }
                 level={ level }
                 inline={ true }
+                collapsedTotal={ this.props.collapsedTotal }
                 { ...textStyles } />
             : <Ellipsis { ...textStyles }/>;
         }
@@ -156,6 +164,7 @@ Complex.propTypes = {
   collapsedStyle: PropTypes.shape({ italic: Text.propTypes.italic }),
   italic: Text.propTypes.italic,
   size: Text.propTypes.size,
+  collapsedTotal: PropTypes.number, // The number of {object} properties to show when not expanded.
   onClick: PropTypes.func,
 };
 Complex.defaultProps = {
@@ -163,5 +172,6 @@ Complex.defaultProps = {
   isExpanded: false,
   level: 0,
   italic: Text.defaultProps.italic,
-  size: Text.defaultProps.size
+  size: Text.defaultProps.size,
+  collapsedTotal: 3
 };
