@@ -21,7 +21,7 @@ Rich visual representation and editor of javascript objects and values.
 Render a complex object:
 
 ```js
-import Value from "react-object";
+import { Value } from "react-object";
 
 const obj = { foo: 123, bar: { baz: "hello" }};
 
