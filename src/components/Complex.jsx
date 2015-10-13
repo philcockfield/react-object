@@ -54,11 +54,12 @@ const withinBounds = (array, max) => {
 
 const toArrayProps = (array, max) => {
     // Add array items.
-    const items = withinBounds(array, max).map((item, i) => {
+    let items = array.map((item, i) => {
         return item === ELLIPSIS
           ? item
           : toProp(i.toString(), item)
       });
+    items = withinBounds(items, max);
 
     // Add any properties on the array.
     const keys = R.keys(array);
