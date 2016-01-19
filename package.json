@@ -1,6 +1,6 @@
 {
   "name": "react-object",
-  "version": "1.0.6",
+  "version": "2.0.0",
   "description": "Rich visual representation and editor of javascript objects and values.",
   "main": "./lib/index.js",
   "scripts": {
