@@ -1,6 +1,6 @@
 import R from "ramda";
 import React from "react";
-import { PropTypes } from "js-util/react";
+import { PropTypes } from "./util";
 import Text from "./Text";
 
 
