@@ -14,7 +14,7 @@
     "js-util": "^2.0.2",
     "radium": "^0.14.1",
     "ramda": "^0.17.1",
-    "react": "^0.14.2",
+    "react": "^0.14.6",
     "react-atoms": "^1.0.14",
     "react-schema": "^1.1.0"
   },

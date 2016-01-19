@@ -10,6 +10,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
         static propTypes = {};
         static defaultProps = {};
+- Updated to `react@0.14.6`.
+
 
 #### Deprecated
 #### Removed
