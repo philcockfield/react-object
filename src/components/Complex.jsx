@@ -80,8 +80,7 @@ const toArrayProps = (array, max) => {
 /**
  * A complex value (Object, Array).
  */
-@Radium
-export default class Complex extends React.Component {
+class Complex extends React.Component {
   styles() {
     return css({
       base: {
@@ -181,3 +180,5 @@ Complex.defaultProps = {
   size: Text.defaultProps.size,
   collapsedTotal: 3
 };
+
+export default Radium(Complex);

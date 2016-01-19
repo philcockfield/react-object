@@ -19,8 +19,7 @@ export const COLORS = {
 /**
  * Text display with commonly used style properties.
  */
-@Radium
-export default class Text extends React.Component {
+class Text extends React.Component {
   styles() {
     return css({
       base: {
@@ -77,3 +76,5 @@ Text.defaultProps = {
   letterSpacing: "normal",
   lineHeight: "1.4em"
 };
+
+export default Radium(Text);

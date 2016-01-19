@@ -12,8 +12,7 @@ export const ELLIPSIS = Symbol("ellipsis");
 /**
  * A list of <Value>'s.
  */
-@Radium
-export default class ValueList extends React.Component {
+class ValueList extends React.Component {
   constructor(props) {
     super(props);
     if (!Value) { Value = require("./Value"); }
@@ -98,3 +97,6 @@ ValueList.defaultProps = {
   items: [],
   level: 0
 };
+
+
+export default Radium(ValueList);

@@ -17,8 +17,7 @@ import { isEmptyObjectOrArray } from "./util";
 /**
  * A single value of any type (with optional key and expansion toggle).
  */
-@Radium
-export default class Value extends React.Component {
+class Value extends React.Component {
   componentWillMount() {
     this.setState({ isExpanded: this.props.isExpanded });
   }
@@ -163,3 +162,5 @@ Value.defaultProps = {
   marginLeft: 0,
   marginRight: 0
 };
+
+export default Radium(Value);
