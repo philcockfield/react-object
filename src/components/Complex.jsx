@@ -81,6 +81,30 @@ const toArrayProps = (array, max) => {
  * A complex value (Object, Array).
  */
 class Complex extends React.Component {
+  static propTypes = {
+    label: PropTypes.boolOrString,
+    value: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.array
+    ]).isRequired,
+    level: PropTypes.number,
+    isExpanded: PropTypes.bool,
+    collapsedStyle: PropTypes.shape({ italic: Text.propTypes.italic }),
+    italic: Text.propTypes.italic,
+    size: Text.propTypes.size,
+    collapsedTotal: PropTypes.number, // The number of {object} properties to show when not expanded.
+    onClick: PropTypes.func
+  };
+  static defaultProps = {
+    label: true,
+    isExpanded: false,
+    level: 0,
+    italic: Text.defaultProps.italic,
+    size: Text.defaultProps.size,
+    collapsedTotal: 3
+  };
+
+
   styles() {
     return css({
       base: {
@@ -155,30 +179,5 @@ class Complex extends React.Component {
   }
 }
 
-
-
-// API -------------------------------------------------------------------------
-Complex.propTypes = {
-  label: PropTypes.boolOrString,
-  value: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.array
-  ]).isRequired,
-  level: PropTypes.number,
-  isExpanded: PropTypes.bool,
-  collapsedStyle: PropTypes.shape({ italic: Text.propTypes.italic }),
-  italic: Text.propTypes.italic,
-  size: Text.propTypes.size,
-  collapsedTotal: PropTypes.number, // The number of {object} properties to show when not expanded.
-  onClick: PropTypes.func
-};
-Complex.defaultProps = {
-  label: true,
-  isExpanded: false,
-  level: 0,
-  italic: Text.defaultProps.italic,
-  size: Text.defaultProps.size,
-  collapsedTotal: 3
-};
 
 export default Radium(Complex);

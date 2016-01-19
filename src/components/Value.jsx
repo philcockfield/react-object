@@ -18,6 +18,29 @@ import { isEmptyObjectOrArray } from "./util";
  * A single value of any type (with optional key and expansion toggle).
  */
 class Value extends React.Component {
+  static propTypes = {
+    value: PropTypes.any,
+    label: PropTypes.string,
+    italic: Text.propTypes.italic,
+    size: Text.propTypes.size,
+    inline: PropTypes.bool,
+    level: PropTypes.number,
+    isExpanded: PropTypes.bool,
+    showTwisty: PropTypes.bool,
+    marginLeft: PropTypes.numberOrString,
+    marginRight: PropTypes.numberOrString,
+    collapsedTotal: PropTypes.number // The number of {object} properties to show when not expanded.
+  };
+  static defaultProps = {
+    italic: Text.defaultProps.italic,
+    size: Text.defaultProps.size,
+    inline: false,
+    level: 0,
+    isExpanded: false,
+    marginLeft: 0,
+    marginRight: 0
+  };
+
   componentWillMount() {
     this.setState({ isExpanded: this.props.isExpanded });
   }
@@ -138,29 +161,5 @@ class Value extends React.Component {
     );
   }
 }
-
-// API -------------------------------------------------------------------------
-Value.propTypes = {
-  value: PropTypes.any,
-  label: PropTypes.string,
-  italic: Text.propTypes.italic,
-  size: Text.propTypes.size,
-  inline: PropTypes.bool,
-  level: PropTypes.number,
-  isExpanded: PropTypes.bool,
-  showTwisty: PropTypes.bool,
-  marginLeft: PropTypes.numberOrString,
-  marginRight: PropTypes.numberOrString,
-  collapsedTotal: PropTypes.number // The number of {object} properties to show when not expanded.
-};
-Value.defaultProps = {
-  italic: Text.defaultProps.italic,
-  size: Text.defaultProps.size,
-  inline: false,
-  level: 0,
-  isExpanded: false,
-  marginLeft: 0,
-  marginRight: 0
-};
 
 export default Radium(Value);

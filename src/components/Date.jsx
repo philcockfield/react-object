@@ -13,6 +13,16 @@ const doubleDigits = (number) => {
  * A Date object.
  */
 export default class DateComponent extends React.Component {
+  static propTypes = {
+    value: PropTypes.instanceOf(Date).isRequired,
+    italic: Text.propTypes.italic,
+    size: Text.propTypes.size
+  };
+  static defaultProps = {
+    italic: true,
+    size: Text.defaultProps.size
+  };
+
   render() {
     const { value, italic, size } = this.props;
     const textProps = { italic, size };
@@ -41,14 +51,3 @@ export default class DateComponent extends React.Component {
     );
   }
 }
-
-// API -------------------------------------------------------------------------
-DateComponent.propTypes = {
-  value: PropTypes.instanceOf(Date).isRequired,
-  italic: Text.propTypes.italic,
-  size: Text.propTypes.size
-};
-DateComponent.defaultProps = {
-  italic: true,
-  size: Text.defaultProps.size
-};

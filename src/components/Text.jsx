@@ -20,6 +20,28 @@ export const COLORS = {
  * Text display with commonly used style properties.
  */
 class Text extends React.Component {
+  static propTypes = {
+    inline: PropTypes.bool,
+    italic: PropTypes.bool,
+    size: PropTypes.numberOrString,
+    color: PropTypes.oneOf(Object.keys(COLORS)),
+    marginLeft: PropTypes.numberOrString,
+    marginRight: PropTypes.numberOrString,
+    letterSpacing: PropTypes.numberOrString,
+    lineHeight: PropTypes.numberOrString,
+    onClick: PropTypes.func
+  };
+  static defaultProps = {
+    inline: true,
+    italic: false,
+    size: 12,
+    color: "darkGrey",
+    marginLeft: 0,
+    marginRight: 0,
+    letterSpacing: "normal",
+    lineHeight: "1.4em"
+  };
+
   styles() {
     return css({
       base: {
@@ -52,29 +74,5 @@ class Text extends React.Component {
         : <div style={ styles.base } onClick={ handleClick }>{ this.props.children }</div>;
   }
 }
-
-
-// API -------------------------------------------------------------------------
-Text.propTypes = {
-  inline: PropTypes.bool,
-  italic: PropTypes.bool,
-  size: PropTypes.numberOrString,
-  color: PropTypes.oneOf(Object.keys(COLORS)),
-  marginLeft: PropTypes.numberOrString,
-  marginRight: PropTypes.numberOrString,
-  letterSpacing: PropTypes.numberOrString,
-  lineHeight: PropTypes.numberOrString,
-  onClick: PropTypes.func
-};
-Text.defaultProps = {
-  inline: true,
-  italic: false,
-  size: 12,
-  color: "darkGrey",
-  marginLeft: 0,
-  marginRight: 0,
-  letterSpacing: "normal",
-  lineHeight: "1.4em"
-};
 
 export default Radium(Text);

@@ -8,6 +8,14 @@ import { functionParameters } from "js-util";
  * A Function with parameters details.
  */
 export default class Function extends React.Component {
+  static propTypes = {
+    value: PropTypes.func.isRequired,
+    size: Text.propTypes.size
+  };
+  static defaultProps = {
+    size: Text.defaultProps.size
+  };
+
   render() {
     const { value, size } = this.props;
     const textProps = { italic: true, size };
@@ -34,12 +42,3 @@ export default class Function extends React.Component {
     );
   }
 }
-
-// API -------------------------------------------------------------------------
-Function.propTypes = {
-  value: PropTypes.func.isRequired,
-  size: Text.propTypes.size
-};
-Function.defaultProps = {
-  size: Text.defaultProps.size
-};

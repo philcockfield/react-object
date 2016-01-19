@@ -29,6 +29,20 @@ export const isPrimitive = (value) => {
  * A primitive/simple value.
  */
 export default class Primitive extends React.Component {
+  static propTypes = {
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.bool
+    ]),
+    italic: Text.propTypes.italic,
+    size: Text.propTypes.size
+  };
+  static defaultProps = {
+    italic: Text.defaultProps.italic,
+    size: Text.defaultProps.size
+  };
+
   render() {
     let { value } = this.props;
     const type = R.type(value);
@@ -43,18 +57,3 @@ export default class Primitive extends React.Component {
     );
   }
 }
-
-// API -------------------------------------------------------------------------
-Primitive.propTypes = {
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.bool
-  ]),
-  italic: Text.propTypes.italic,
-  size: Text.propTypes.size
-};
-Primitive.defaultProps = {
-  italic: Text.defaultProps.italic,
-  size: Text.defaultProps.size
-};

@@ -13,6 +13,22 @@ export const ELLIPSIS = Symbol("ellipsis");
  * A list of <Value>'s.
  */
 class ValueList extends React.Component {
+  static propTypes = {
+    inline: PropTypes.bool,
+    italic: Text.propTypes.italic,
+    size: Text.propTypes.size,
+    items: PropTypes.array,
+    level: PropTypes.number,
+    collapsedTotal: PropTypes.number // The number of {object} properties to show when not expanded.
+  };
+  static defaultProps = {
+    inline: false,
+    italic: Text.defaultProps.italic,
+    size: Text.defaultProps.size,
+    items: [],
+    level: 0
+  };
+
   constructor(props) {
     super(props);
     if (!Value) { Value = require("./Value"); }
@@ -80,23 +96,5 @@ class ValueList extends React.Component {
     return <ul style={ styles.base }>{ items }</ul>;
   }
 }
-
-// API -------------------------------------------------------------------------
-ValueList.propTypes = {
-  inline: PropTypes.bool,
-  italic: Text.propTypes.italic,
-  size: Text.propTypes.size,
-  items: PropTypes.array,
-  level: PropTypes.number,
-  collapsedTotal: PropTypes.number // The number of {object} properties to show when not expanded.
-};
-ValueList.defaultProps = {
-  inline: false,
-  italic: Text.defaultProps.italic,
-  size: Text.defaultProps.size,
-  items: [],
-  level: 0
-};
-
 
 export default Radium(ValueList);

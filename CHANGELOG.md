@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased] - YYYY-MM-DD
 #### Added
 #### Changed
+- Updated component `PropTypes` to use static properties.
+
+        static propTypes = {};
+        static defaultProps = {};
+
 #### Deprecated
 #### Removed
 #### Fixed
