@@ -2,7 +2,7 @@
 import React from "react";
 import Radium from "radium";
 import Ellipsis from "./Ellipsis";
-import { css, PropTypes } from "js-util/react";
+import { css, PropTypes } from "./util";
 import Text from "./Text";
 let Value; // NB: Lazily required to prevent circular-reference.
 

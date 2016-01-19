@@ -3,7 +3,7 @@
 import R from "ramda";
 import React from "react";
 import Radium from "radium";
-import { css, PropTypes } from "js-util/react";
+import { css, PropTypes } from "./util";
 import Text from "./Text";
 import ValueList, { ELLIPSIS } from "./ValueList";
 import Ellipsis from "./Ellipsis";
