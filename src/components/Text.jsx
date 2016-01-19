@@ -1,4 +1,3 @@
-import R from "ramda";
 import React from "react";
 import Radium from "radium";
 import { css, PropTypes } from "js-util/react";
@@ -51,7 +50,7 @@ export default class Text extends React.Component {
     const handleClick = this.handleClick.bind(this);
     return this.props.inline
         ? <span style={ styles.base } onClick={ handleClick }>{ this.props.children }</span>
-        : <div style={ styles.base } onClick={ handleClick }>{ this.props.children }</div>
+        : <div style={ styles.base } onClick={ handleClick }>{ this.props.children }</div>;
   }
 }
 
@@ -66,7 +65,7 @@ Text.propTypes = {
   marginRight: PropTypes.numberOrString,
   letterSpacing: PropTypes.numberOrString,
   lineHeight: PropTypes.numberOrString,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func
 };
 Text.defaultProps = {
   inline: true,

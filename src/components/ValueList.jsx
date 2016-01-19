@@ -1,10 +1,10 @@
-import R from "ramda";
+/* eslint no-unused-vars: 0 */
 import React from "react";
 import Radium from "radium";
+import Ellipsis from "./Ellipsis";
 import { css, PropTypes } from "js-util/react";
 import Text from "./Text";
-import Ellipsis from "./Ellipsis";
-let Value // NB: Lazily required to prevent circular-reference.
+let Value; // NB: Lazily required to prevent circular-reference.
 
 export const ELLIPSIS = Symbol("ellipsis");
 
@@ -78,7 +78,7 @@ export default class ValueList extends React.Component {
         }
     });
 
-    return <ul style={ styles.base }>{ items }</ul>
+    return <ul style={ styles.base }>{ items }</ul>;
   }
 }
 
@@ -89,7 +89,7 @@ ValueList.propTypes = {
   size: Text.propTypes.size,
   items: PropTypes.array,
   level: PropTypes.number,
-  collapsedTotal: PropTypes.number, // The number of {object} properties to show when not expanded.
+  collapsedTotal: PropTypes.number // The number of {object} properties to show when not expanded.
 };
 ValueList.defaultProps = {
   inline: false,

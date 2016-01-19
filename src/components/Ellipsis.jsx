@@ -1,5 +1,6 @@
+/* eslint no-unused-vars: 0 */
+
 import React from "react";
-import { PropTypes } from "js-util/react";
 import Text from "./Text";
 
 
@@ -16,7 +17,3 @@ export default class Ellipsis extends React.Component {
     );
   }
 }
-
-// API -------------------------------------------------------------------------
-Ellipsis.propTypes = {};
-Ellipsis.defaultProps = {};

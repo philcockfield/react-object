@@ -1,6 +1,6 @@
 import R from "ramda";
 import React from "react";
-import { css, PropTypes } from "js-util/react";
+import { PropTypes } from "js-util/react";
 import Text from "./Text";
 
 
@@ -46,7 +46,7 @@ export default class DateComponent extends React.Component {
 DateComponent.propTypes = {
   value: PropTypes.instanceOf(Date).isRequired,
   italic: Text.propTypes.italic,
-  size: Text.propTypes.size,
+  size: Text.propTypes.size
 };
 DateComponent.defaultProps = {
   italic: true,

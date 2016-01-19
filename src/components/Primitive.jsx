@@ -1,6 +1,6 @@
 import R from "ramda";
 import React from "react";
-import { css, PropTypes } from "js-util/react";
+import { PropTypes } from "js-util/react";
 import Text from "./Text";
 
 const COLORS = {

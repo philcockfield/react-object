@@ -1,3 +1,5 @@
+/* eslint no-unused-vars: 0 */
+
 import R from "ramda";
 import React from "react";
 import Radium from "radium";
@@ -26,7 +28,7 @@ export default class Value extends React.Component {
     const { isExpanded } = this.state;
     const showTwisty = this.showTwisty();
     const twistyWidth = 10;
-    const indent = showTwisty === true ? twistyWidth + 2 : 0
+    const indent = showTwisty === true ? twistyWidth + 2 : 0;
     const canExpand = showTwisty && !isExpanded && !this.isPrimitive() && !isEmptyObjectOrArray(value);
 
     return css({
@@ -77,7 +79,7 @@ export default class Value extends React.Component {
     const { label, italic, size, value, level } = this.props;
     const { isExpanded } = this.state;
     const textStyles = { italic, size };
-    const isPrimitive = this.isPrimitive();
+    const IS_PRIMITIVE = this.isPrimitive();
     let showTwisty = this.showTwisty();
 
     if (isEmptyObjectOrArray(value)) {
@@ -85,11 +87,11 @@ export default class Value extends React.Component {
     }
 
     let elTwisty, handleToggleClick;
-    if (showTwisty === true && !isPrimitive) {
+    if (showTwisty === true && !IS_PRIMITIVE) {
       handleToggleClick = this.handleToggleClick.bind(this);
       // NB: Add the "zero width non-joiner" (\u200C) character to force the
       //     height of the twisty container to the height of the label.
-      elTwisty =  <div style={ styles.twistyOuter }>
+      elTwisty = <div style={ styles.twistyOuter }>
                     <div style={ styles.twistyAlign }>
                       <Twisty
                           isOpen={ isExpanded }
@@ -97,7 +99,7 @@ export default class Value extends React.Component {
                           />
                     </div>
                     { "\u200C" }
-                  </div>
+                 </div>;
     }
 
     const elLabel = label && <Text
@@ -106,15 +108,15 @@ export default class Value extends React.Component {
                                 { ...textStyles }>{ label }</Text>;
 
     let elValue;
-    if (isPrimitive) {
+    if (IS_PRIMITIVE) {
       // Simple value (string, number, bool).
       elValue = <Primitive value={ value } { ...textStyles }/>;
     } else {
       // Complex value (object, array).
       if (R.is(Function, value)) {
-        elValue = <FunctionComponent { ...textStyles } value={ value }/>
+        elValue = <FunctionComponent { ...textStyles } value={ value }/>;
       } else if (R.is(Date, value)) {
-        elValue = <DateComponent { ...textStyles } value={ value }/>
+        elValue = <DateComponent { ...textStyles } value={ value }/>;
       } else {
         elValue = <Complex
                       { ...textStyles }
@@ -123,7 +125,7 @@ export default class Value extends React.Component {
                       label={ level === 0 }
                       isExpanded={ isExpanded }
                       collapsedTotal={ this.props.collapsedTotal }
-                      />
+                      />;
       }
     }
 
@@ -150,7 +152,7 @@ Value.propTypes = {
   showTwisty: PropTypes.bool,
   marginLeft: PropTypes.numberOrString,
   marginRight: PropTypes.numberOrString,
-  collapsedTotal: PropTypes.number, // The number of {object} properties to show when not expanded.
+  collapsedTotal: PropTypes.number // The number of {object} properties to show when not expanded.
 };
 Value.defaultProps = {
   italic: Text.defaultProps.italic,

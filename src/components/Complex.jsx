@@ -1,3 +1,5 @@
+/* eslint no-unused-vars: 0 */
+
 import R from "ramda";
 import React from "react";
 import Radium from "radium";
@@ -23,16 +25,6 @@ const toObjectProps = (obj, max) => {
   };
 
 
-const toPrimitiveProps = (obj, max) => {
-    const isPrimitiveProp = (prop) => isPrimitive(prop.value);
-    let props = R.filter(isPrimitiveProp, toObjectProps(obj));
-    props = withinBounds(props, max);
-    if (R.keys(obj).length > props.length && !R.any(R.equals(ELLIPSIS), props)) {
-      props.push(ELLIPSIS);
-    }
-    return props;
-  };
-
 
 const withinBounds = (array, max) => {
     if (max === 0) { return []; }
@@ -52,12 +44,25 @@ const withinBounds = (array, max) => {
   };
 
 
+
+const toPrimitiveProps = (obj, max) => {
+    const isPrimitiveProp = (prop) => isPrimitive(prop.value);
+    let props = R.filter(isPrimitiveProp, toObjectProps(obj));
+    props = withinBounds(props, max);
+    if (R.keys(obj).length > props.length && !R.any(R.equals(ELLIPSIS), props)) {
+      props.push(ELLIPSIS);
+    }
+    return props;
+  };
+
+
+
 const toArrayProps = (array, max) => {
     // Add array items.
     let items = array.map((item, i) => {
         return item === ELLIPSIS
           ? item
-          : toProp(i.toString(), item)
+          : toProp(i.toString(), item);
       });
     items = withinBounds(items, max);
 
@@ -113,14 +118,14 @@ export default class Complex extends React.Component {
                       items={ items }
                       level={ level }
                       collapsedTotal={ this.props.collapsedTotal }
-                      { ...textStyles } />
+                      { ...textStyles } />;
 
     } else {
 
       // -- Collapsed --.
       if (isArray && value.length > 0) {
         // Array: Show length, eg: "[2]".
-        elContent = <Text color="grey" { ...textStyles }>{ value.length }</Text>
+        elContent = <Text color="grey" { ...textStyles }>{ value.length }</Text>;
       } else {
         // Object: Show flat list of primitive props, eg: { foo:123 }.
         const totalProps = R.keys(value).length;
@@ -166,7 +171,7 @@ Complex.propTypes = {
   italic: Text.propTypes.italic,
   size: Text.propTypes.size,
   collapsedTotal: PropTypes.number, // The number of {object} properties to show when not expanded.
-  onClick: PropTypes.func,
+  onClick: PropTypes.func
 };
 Complex.defaultProps = {
   label: true,

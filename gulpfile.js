@@ -16,7 +16,7 @@ gulp.task("watch", function(callback) { gulp.watch(SOURCE_PATH, ["build"]) });
 
 
 gulp.task("lint", function() {
-  return gulp.src(SOURCE_PATH)
+  return gulp.src(["./src/components/**/*.js", "./src/components/**/*.jsx"])
     .pipe(eslint())
     .pipe(eslint.format());
 });
