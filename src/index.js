@@ -1,10 +1,2 @@
-import Value from "./components/Value";
-import ValueList from "./components/ValueList";
-
-/**
- * Public API.
- */
-export default {
-  Value,
-  ValueList
-};
+export const Value = require("./components/Value").default;
+export const ValueList = require("./components/ValueList").default;
