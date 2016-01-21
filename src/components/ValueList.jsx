@@ -31,7 +31,9 @@ class ValueList extends React.Component {
 
   constructor(props) {
     super(props);
-    if (!Value) { Value = require("./Value"); }
+    if (!Value) {
+      Value = require("./Value").default; // NB: Lazily required to prevent circular-reference.
+    }
   }
 
   styles() {
