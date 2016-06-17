@@ -13,13 +13,13 @@
     "prepublish": "npm test && npm run lint && npm run build"
   },
   "dependencies": {
-    "ui-harness": "^3.9.4"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "chai": "^3.5.0",
     "js-babel-dev": "^6.0.6",
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "ui-harness": "^3.9.5"
   },
   "repository": {
     "type": "git",
