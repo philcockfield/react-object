@@ -1,2 +1,2 @@
-export const Value = require("./components/Value").default;
-export const ValueList = require("./components/ValueList").default;
+export Value from './components/Value';
+export ValueList from './components/ValueList';
