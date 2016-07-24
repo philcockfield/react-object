@@ -151,20 +151,21 @@ class Complex extends React.Component {
         elContent = <Text color="grey" { ...textStyles }>{ value.length }</Text>;
       } else {
         // Object: Show flat list of primitive props, eg: { foo:123 }.
-        const totalProps = R.keys(value).length;
-        if (totalProps > 0) {
-          const primitiveProps = toPrimitiveProps(value, this.props.collapsedTotal);
-          const hasProps = primitiveProps.length > 0;
-          braceMargin = hasProps ? 3 : 0;
-          elContent = hasProps
-            ? <ValueList
-                items={ primitiveProps }
-                level={ level }
-                inline={ true }
-                collapsedTotal={ this.props.collapsedTotal }
-                { ...textStyles } />
-            : <Ellipsis { ...textStyles }/>;
-        }
+        elContent = <Ellipsis { ...textStyles }/>;
+        // const totalProps = R.keys(value).length;
+        // if (totalProps > 0) {
+        //   const primitiveProps = toPrimitiveProps(value, this.props.collapsedTotal);
+        //   const hasProps = primitiveProps.length > 0;
+        //   braceMargin = hasProps ? 3 : 0;
+        //   elContent = hasProps
+        //     ? <ValueList
+        //         items={ primitiveProps }
+        //         level={ level }
+        //         inline={ true }
+        //         collapsedTotal={ this.props.collapsedTotal }
+        //         { ...textStyles } />
+        //     : <Ellipsis { ...textStyles }/>;
+        // }
       }
     }
 
