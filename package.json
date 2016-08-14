@@ -12,7 +12,10 @@
     "build:watch": "npm run build -- --watch",
     "prepublish": "npm test && npm run lint && npm run build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "radium": "^0.18.1",
+    "ramda": "^0.22.1"
+  },
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "chai": "^3.5.0",
