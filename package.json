@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "radium": "^0.18.1",
-    "ramda": "^0.22.1"
+    "ramda": "^0.22.1",
+    "react-atoms": "^2.0.10"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
